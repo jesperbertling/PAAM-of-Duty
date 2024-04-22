@@ -58,7 +58,7 @@ namespace ZombieGame.Service
             else
             {
                 Console.WriteLine("Invalid response. Please answer 'yes' or 'no'.");
-                StartGame(); // Fråga igen
+                StartGame();
             }
 
             GameLoop(); 
@@ -68,8 +68,8 @@ namespace ZombieGame.Service
         {
             Introduction();
             IninitializePlayer();
-            roomService.AssignZombiesToAllRooms(); // Se till att alla rum har zombies vid start av nytt spel
-            gameState.TotalZombies = roomService.Rooms.Sum(room => room.Zombies.Count); // Uppdatera totala antalet zombies
+            roomService.AssignZombiesToAllRooms(); 
+            gameState.TotalZombies = roomService.Rooms.Sum(room => room.Zombies.Count);
             Console.WriteLine($"Game started with a total of {gameState.TotalZombies} zombies.");
         }
 
@@ -144,7 +144,7 @@ namespace ZombieGame.Service
                     }
                 }
             }
-            Console.WriteLine("Thank you for playing!");  // Visa meddelande när spelet är över
+            Console.WriteLine("Thank you for playing!"); 
         }
 
 
@@ -282,7 +282,7 @@ namespace ZombieGame.Service
             {
                 Console.WriteLine($"You moved to {nextRoom.Name}.");
                 gameState.CurrentRoom = nextRoom;
-                // Triggera eventuella händelser efter flytt, som zombie-attacker
+                
             }
             else
             {
@@ -387,7 +387,7 @@ namespace ZombieGame.Service
         {
             var player = gameState.Player;
 
-            // Kontrollera om det finns några objekt i spelarens inventarium
+            
             if (player.Items == null || player.Items.Count == 0)
             {
                 Console.WriteLine("Your inventory is empty.");
@@ -396,7 +396,7 @@ namespace ZombieGame.Service
 
             Console.WriteLine("Select an item to use:");
 
-            // Visa inventariet med index
+           
             for (int i = 0; i < player.Items.Count; i++)
             {
                 Console.WriteLine($"{i + 1}: {player.Items[i].Name} (Type: {player.Items[i].Type})");
@@ -454,7 +454,7 @@ namespace ZombieGame.Service
                     {
                         var currentWeaponNames = gameState.Player.Weapons?.Select(w => w.Name).ToList() ?? new List<string>();
                         var possibleWeapons = weaponService.GetAllWeapons()
-                            .Where(w => !currentWeaponNames.Contains(w.Name))  // Exkludera vapen som spelaren redan har
+                            .Where(w => !currentWeaponNames.Contains(w.Name))  
                             .ToList();
 
                         if (possibleWeapons.Any())
@@ -462,17 +462,17 @@ namespace ZombieGame.Service
                             var random = new Random();
                             var chosenWeapon = possibleWeapons[random.Next(possibleWeapons.Count)];
 
-                            gameState.Player.Points -= 100;  // Minska spelarens poäng
+                            gameState.Player.Points -= 100;  
 
                             // Ta bort Colt om den finns
                             var startWeapon = gameState.Player.Weapons.FirstOrDefault(w => w.Name == "16 Colt M1911");
                             if (startWeapon != null)
                             {
-                                gameState.Player.Weapons.Remove(startWeapon);  // Ta bort Colt
+                                gameState.Player.Weapons.Remove(startWeapon);  
                             }
 
-                            gameState.Player.Weapons.Add(chosenWeapon);  // Lägg till det nya vapnet
-                            gameState.Player.CurrentWeapon = chosenWeapon;  // Utrusta det nya vapnet
+                            gameState.Player.Weapons.Add(chosenWeapon); 
+                            gameState.Player.CurrentWeapon = chosenWeapon;  
 
                             Console.WriteLine($"You got a {chosenWeapon.Name} from the Mystery Box!");
                         }

@@ -13,10 +13,10 @@ class Program
         PlayerService playerService = new PlayerService(weaponService, roomService);
         ZombieService zombieService = new ZombieService(playerService);
 
-        // Skapa GameService med alla beroenden
+       
         GameService gameService = new GameService(gameState, playerService, roomService, zombieService, itemService, weaponService);
 
-        // Starta spelet
+        
         gameService.StartGame();
 
     }

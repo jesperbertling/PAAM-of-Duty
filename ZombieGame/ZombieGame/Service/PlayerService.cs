@@ -83,12 +83,12 @@ namespace ZombieGame.Service
             var newPlayer = new Player
             {
                 Name = name,
-                Health = 100, // Startvärde
+                Health = 100, 
                 Items = new List<Item>(),
                 Weapons = new List<Weapon>(),
                 Points = 0,
-                CurrentWeapon = weaponService.GetFirstWeapon(), // Startvapen
-                CurrentRoom = null, // Uppdateras senare
+                CurrentWeapon = weaponService.GetFirstWeapon(), 
+                CurrentRoom = null, 
                 isDown = false,
                 GameOver = false
             };
@@ -98,7 +98,7 @@ namespace ZombieGame.Service
     }
         public void InteractWithMysteryBox(Room currentRoom)
         {
-            if (currentRoom.Name == "Lounge") // Säkerställ att det är rätt rum
+            if (currentRoom.Name == "Lounge") 
             {
                 Console.WriteLine("Welcome to the Mystery Box! Would you like to buy a random weapon for 100 points? (yes/no)");
                 var answer = Console.ReadLine().Trim().ToLower();
@@ -110,7 +110,7 @@ namespace ZombieGame.Service
                         var availableWeapons = weaponService.GetAllWeapons();
                         var currentWeaponNames = player.Weapons.Select(w => w.Name).ToList();
 
-                        // Ta bort vapen som spelaren redan har
+                        
                         var possibleWeapons = availableWeapons
                             .Where(w => !currentWeaponNames.Contains(w.Name))
                             .ToList();

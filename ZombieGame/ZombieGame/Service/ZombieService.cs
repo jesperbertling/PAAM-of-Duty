@@ -40,12 +40,12 @@ namespace ZombieGame.Service
             {
                 if (zombie.Health > 0)
                 {
-                    int attack = new Random().Next(1, 5); // Attackstyrka
+                    int attack = new Random().Next(1, 5); 
                     player.Health -= attack;
 
                     Console.WriteLine($"A zombie attacked and hit you, damage done by the zombie was {attack}");
 
-                    if (player.Health <= 0) // Om hälsan är noll eller mindre
+                    if (player.Health <= 0) 
                     {
                         Console.WriteLine($"Your health is {player.Health}, you're knocked down");
                         playerService.Revive(); 

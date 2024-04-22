@@ -37,9 +37,8 @@ namespace ZombieGame.Helpers
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true, // Hjälper till att hantera fall där egenskapsnamn i JSON inte matchar exakt med egenskapsnamn i klasserna
-                ReferenceHandler = ReferenceHandler.Preserve // Hanterar referenser och cykler
-            };
+                PropertyNameCaseInsensitive = true,
+                ReferenceHandler = ReferenceHandler.Preserve 
 
             try
             {
